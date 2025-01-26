@@ -7,6 +7,10 @@ name = "pypi"
 django = "5.1.5"
 django-debug-toolbar = "5.0.1"
 pillow = "11.1.0"
+python-decouple = "3.8"
+django-taggit = "5.0.1"
+markdown = "3.6"
+psycopg = "3.1.18"
 
 [dev-packages]
 djlint = "*"

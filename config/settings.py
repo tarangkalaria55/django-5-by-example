@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,8 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+SITE_ID = 1
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,14 +42,13 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.sites",
+    "django.contrib.sitemaps",
     "django.contrib.staticfiles",
-    ######################
-    ## THIRD_PARTY_APPS ##
-    ######################
     "debug_toolbar",
-    ######################
-    ##### LOCAL_APPS #####
-    ######################
+    "django.contrib.postgres",
+    "taggit",
+    "blog.apps.BlogConfig",
 ]
 
 MIDDLEWARE = [
@@ -87,11 +89,13 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("DB_NAME"),
+        "USER": config("DB_USER"),
+        "PASSWORD": config("DB_PASSWORD"),
+        "HOST": config("DB_HOST"),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -135,9 +139,10 @@ MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 
 if DEBUG:
     import mimetypes
@@ -145,4 +150,11 @@ if DEBUG:
     mimetypes.add_type("application/javascript", ".js", True)
 
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# Email server configuration
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
