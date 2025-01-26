@@ -7,10 +7,11 @@ name = "pypi"
 django = "5.1.5"
 django-debug-toolbar = "5.0.1"
 pillow = "11.1.0"
+python-decouple = "3.8"
 
 [dev-packages]
-djlint = "*"
 black = "*"
+djlint = "*"
 
 [requires]
 python_version = "3.13"
