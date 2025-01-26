@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "5.1.5"
+django-debug-toolbar = "5.0.1"
+pillow = "11.1.0"
+
+[dev-packages]
+djlint = "*"
+black = "*"
+
+[requires]
+python_version = "3.13"
