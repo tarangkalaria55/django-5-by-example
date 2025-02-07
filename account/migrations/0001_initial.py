@@ -9,30 +9,17 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("auth", "0012_alter_user_first_name_max_length"),
+        ('auth', '0012_alter_user_first_name_max_length'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name="Profile",
+            name='Profile',
             fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                ("date_of_birth", models.DateField(blank=True, null=True)),
-                ("photo", models.ImageField(blank=True, upload_to="users/%Y/%m/%d/")),
-                (
-                    "user",
-                    models.OneToOneField(
-                        on_delete=django.db.models.deletion.CASCADE, to="auth.user"
-                    ),
-                ),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('date_of_birth', models.DateField(blank=True, null=True)),
+                ('photo', models.ImageField(blank=True, upload_to='users/%Y/%m/%d/')),
+                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='auth.user')),
             ],
         ),
     ]
